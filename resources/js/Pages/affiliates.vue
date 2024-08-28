@@ -69,9 +69,8 @@ export default {
             if (!this.filterName) {
                 this.sortedResults = this.filteredAffiliates;
             } else {
-                this.sortedResults = this.sortedResults.filter(item => {
+                this.sortedResults = this.filteredAffiliates.filter(item => {
                     return item.name.toLowerCase().includes(this.filterName.toLowerCase());
-                    return false;
                 });
             }
         }

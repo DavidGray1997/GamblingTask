@@ -20,7 +20,7 @@ class Controller extends BaseController
         $earthRadius = 6371;
         $affiliates = Affiliate::all();
 
-        $results = collect([]);
+        $filteredAffiliates = collect([]);
 
         foreach ($affiliates as $affiliate) {
 
@@ -42,22 +42,17 @@ class Controller extends BaseController
             $distance = $earthRadius * $c;
 
             if ($distance < 100) {
-                $results->push([
+                $filteredAffiliates->push([
                     'affiliate_id' => $affiliate->affiliate_id,
                     'name' => $affiliate->name,
                     'distance' => $distance
                 ]);
             }
         }
-        $sortedResults = $results->sortBy('affiliate_id')->values()->all();
+        $sortedResults = $filteredAffiliates->sortBy('affiliate_id')->values()->all();
 
         return Inertia::render('Affiliates', [
-            'sortedResults' => $sortedResults
+            'filteredAffiliates' => $filteredAffiliates
         ]);
-    }
-
-    public function uploadData()
-    {
-
     }
 }

@@ -8,11 +8,8 @@ use Illuminate\Http\Response;
 
 class AffiliatesTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+   public const AFFILIATES = 'Affiliates';
+
     public function test_the_application_returns_a_successful_response()
     {
         $response = $this->get('/');
@@ -28,21 +25,21 @@ class AffiliatesTest extends TestCase
 
         $page = $response->viewData('page');
 
-        $this->assertEquals('Welcome', $page['component']);
+        $this->assertEquals(self::AFFILIATES, $page['component']);
 
     }
 
-    public function test_the_application_returns_page_with_ata()
+    public function test_the_application_returns_page_with_data()
     {
         $response = $this->get('/');
-
         $response->assertStatus(Response::HTTP_OK);
 
-        $page = $response->viewData('page');
 
-        $this->assertEquals('Welcome', $page['component']);
+        $page = $response->viewData('page');
+        $this->assertEquals(self::AFFILIATES, $page['component']);
 
         $response->assertValid($page['props']['sortedResults']);
+        $this->assertCount(16, $page['props']['sortedResults']);
 
     }
 }

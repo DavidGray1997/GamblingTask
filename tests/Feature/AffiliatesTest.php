@@ -6,7 +6,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Http\Response;
 
-class ExampleTest extends TestCase
+class AffiliatesTest extends TestCase
 {
     /**
      * A basic test example.

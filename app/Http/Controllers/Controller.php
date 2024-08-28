@@ -51,7 +51,7 @@ class Controller extends BaseController
         }
         $sortedResults = $results->sortBy('affiliate_id')->values()->all();
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Affiliates', [
             'sortedResults' => $sortedResults
         ]);
     }

@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Constants;
 use App\Models\Affiliate;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
-use Illuminate\Foundation\Application;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    protected const GAMBLING_LATITUDE = 53.3340285;
-    protected const GAMBLING_LONGITUDE = -6.2535495;
 
     public function displayAffiliates()
     {
@@ -29,8 +24,8 @@ class Controller extends BaseController
 
         foreach ($affiliates as $affiliate) {
 
-            $lat1 = deg2rad(self::GAMBLING_LATITUDE);
-            $lon1 = deg2rad(self::GAMBLING_LONGITUDE);
+            $lat1 = deg2rad(Constants::GAMBLING_LATITUDE);
+            $lon1 = deg2rad(Constants::GAMBLING_LONGITUDE);
             $lat2 = deg2rad($affiliate->latitude);
             $lon2 = deg2rad($affiliate->longitude);
 
@@ -56,14 +51,7 @@ class Controller extends BaseController
         }
         $sortedResults = $results->sortBy('affiliate_id')->values()->all();
 
-
-
-
-        return Inertia::render('affiliates', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-            'laravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
+        return Inertia::render('Dashboard', [
             'sortedResults' => $sortedResults
         ]);
     }

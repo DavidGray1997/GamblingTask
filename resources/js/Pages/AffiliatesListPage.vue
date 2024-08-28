@@ -1,5 +1,5 @@
 <template #body>
-    <div class="p-6 bg-gray-800 text-white">
+    <div class=" min-h-screen p-6 bg-gray-800 text-white">
 
         <table class="min-w-full divide-y divide-white border">
             <thead class="bg-gray-50 bg-gray-800 text-white">
